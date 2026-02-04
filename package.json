@@ -19,7 +19,6 @@
   "dependencies": {
     "dotenv": "^17.2.3",
     "express": "^5.2.1",
-    "turbo": "^2.8.3",
-    "turborepo": "^0.0.1"
+    "turbo": "^2.8.3"
   }
 }
