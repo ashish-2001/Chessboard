@@ -1,0 +1,25 @@
+{
+  "name": "chessboard",
+  "version": "1.0.0",
+  "main": "index.js",
+  "private": true,
+  "workspaces": [
+    "apps/*",
+    "packages/*"
+  ],
+  "scripts": {
+    "dev:web": "npm run dev --workspace=@chessboard/web",
+    "dev:backend": "npm install --workspaces=@chessboard/backend",
+    "dev": "npm run dev:backend & npm run dev:web"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "description": "",
+  "dependencies": {
+    "dotenv": "^17.2.3",
+    "express": "^5.2.1",
+    "turbo": "^2.8.3",
+    "turborepo": "^0.0.1"
+  }
+}
