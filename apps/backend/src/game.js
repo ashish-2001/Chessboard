@@ -59,12 +59,12 @@ export class Game{
         }
 
         if(this.board.move.length % 2 === 0){
-            this.player2.emit(JSON.stringify({
+            this.player2.send(JSON.stringify({
                 type: MOVE,
                 payload: move
             }))
         } else {
-            this.player1.emit(JSON.stringify({
+            this.player1.send(JSON.stringify({
                 type: MOVE,
                 payload: move
             }))
