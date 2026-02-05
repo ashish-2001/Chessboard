@@ -10,6 +10,10 @@ export class Game{
     }
 
     makeMove(socket, move){
-        
+        try{
+            this.board.move(move)
+        }catch(e){
+            console.error(e.message);
+        }
     }
 }
