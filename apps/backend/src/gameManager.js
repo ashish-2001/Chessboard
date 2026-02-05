@@ -1,5 +1,5 @@
 import { Game } from "./game";
-import { INIT_GAME } from "./messages";
+import { INIT_GAME, MOVE } from "./messages";
 
 export class GameManager {
 
@@ -34,7 +34,7 @@ export class GameManager {
         }
 
         if(message.type === MOVE){
-            
+
         }
     }
 };
