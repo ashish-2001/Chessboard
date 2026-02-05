@@ -18,7 +18,7 @@ export class GameManager {
         this.users = this.users.filter(user => user !== socket)
     }
 
-    addHandler(socket, message){
+    addHandler(socket){
         socket.on("message", (data) => {
             const message = JSON.parse(data.toString());
         })
