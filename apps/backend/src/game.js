@@ -1,5 +1,6 @@
 import { Chess } from 'chess.js';
 import { GAME_OVER, INIT_GAME, MOVE } from './messages.js';
+
 export class Game{
 
     constructor(player1, player2){
@@ -15,7 +16,7 @@ export class Game{
                 color: "white"
             }
         }));
-        
+
         this.player2.send(JSON.stringify({
             type: INIT_GAME,
             payload: {
@@ -35,7 +36,7 @@ export class Game{
         try{
             this.board.move(move)
         }catch(e){
-            console.error(e.message);
+            console.log(e.message);
             return;
         }
 
