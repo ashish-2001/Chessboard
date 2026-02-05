@@ -1,3 +1,5 @@
+import { INIT_GAME } from "./messages";
+
 export class GameManager {
 
     constructor(){
@@ -19,5 +21,13 @@ export class GameManager {
         socket.on("message", (data) => {
             const message = JSON.parse(data.toString());
         })
+
+        if(message.type === INIT_GAME){
+            if(this.pendingUsers){
+
+            } else {
+                this.pendingUsers = socket;
+            }
+        }
     }
-}
+};
