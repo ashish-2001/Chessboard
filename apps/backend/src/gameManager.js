@@ -1,10 +1,11 @@
+import { Game } from "./game";
 import { INIT_GAME } from "./messages";
 
 export class GameManager {
 
-    constructor(){
-        this.game = [];
-        this.pendingUsers = [];
+    constructor(games, pendingUsers, users){
+        this.games = [];
+        this.pendingUsers = null;
         this.users = []
     }
 
@@ -24,10 +25,16 @@ export class GameManager {
 
         if(message.type === INIT_GAME){
             if(this.pendingUsers){
-
+                const game = new Game(this.pendingUsers, socket)
+                this.games.push(game);
+                this.pendingUsers = null;
             } else {
                 this.pendingUsers = socket;
             }
+        }
+
+        if(message.type === MOVE){
+            
         }
     }
 };
