@@ -1,4 +1,5 @@
 import { Chess } from 'chess.js';
+import { GAME_OVER } from './messages';
 export class Game{
 
     constructor(player1, player2, board, moves, startTime){
