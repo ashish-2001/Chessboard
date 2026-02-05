@@ -1,4 +1,4 @@
-import { Game } from "./game";
+import { Game } from "./game.js";
 import { INIT_GAME, MOVE } from "./messages.js";
 
 export class GameManager {
