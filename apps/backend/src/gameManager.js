@@ -15,7 +15,10 @@ export class GameManager {
     }
 
     removeUser(socket){
-        this.users = this.users.filter(user => user !== socket)
+        this.users = this.users.filter(user => user !== socket);
+        if(this.pendingUsers === socket){
+            this.pendingUsers = null;
+        }
     }
 
     addHandler(socket){
@@ -34,9 +37,9 @@ export class GameManager {
         }
 
         if(message.type === MOVE){
-            const game = this.games.find(game => game.player1 === socket || game.player2 === socket);
+            const game = this.games.find(g => g.player1 === socket || game.player2 === socket);
             if(game){
-                game.makeMove(socket, message.move)
+                game.makeMove(socket, message.payload);
             }
         }
     }
