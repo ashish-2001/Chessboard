@@ -20,6 +20,7 @@ export class Game{
             this.board.move(move)
         }catch(e){
             console.error(e.message);
+            return;
         }
     }
 }
