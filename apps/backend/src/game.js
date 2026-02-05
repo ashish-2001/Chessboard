@@ -1,5 +1,5 @@
 import { Chess } from 'chess.js';
-import { GAME_OVER } from './messages';
+import { GAME_OVER, MOVE } from './messages';
 export class Game{
 
     constructor(player1, player2, board, moves, startTime){
@@ -37,7 +37,12 @@ export class Game{
 
         if(this.board.move.length % 2 === 0){
             this.player2.emit(JSON.stringify({
-                type: "move",
+                type: MOVE,
+                payload: move
+            }))
+        } else {
+            this.player1.emit(JSON.stringify({
+                type: MOVE,
                 payload: move
             }))
         }
