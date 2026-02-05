@@ -1,5 +1,5 @@
 import { WebSocketServer } from "ws";
-import { GameManager } from "./gameManager";
+import { GameManager } from "./gameManager.js";
 
 const wss = new WebSocketServer({ port: 8080 });
 
