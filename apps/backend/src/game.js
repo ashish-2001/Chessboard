@@ -62,12 +62,12 @@ export class Game{
             this.player2.send(JSON.stringify({
                 type: MOVE,
                 payload: move
-            }))
+            }));
         } else {
             this.player1.send(JSON.stringify({
                 type: MOVE,
                 payload: move
-            }))
-        }
-    }
-}
+            }));
+        };
+    };
+};
