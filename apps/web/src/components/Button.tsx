@@ -1,4 +1,4 @@
-function Button({ onClick }){
+function Button({ onClick, children }){
     return (
         <div>
             <button onClick={onClick}>This is a button</button>
