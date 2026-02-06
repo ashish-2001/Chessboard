@@ -2,7 +2,7 @@ function Landing(){
     return (
         <>
             <div>
-                This is a Game page
+                This is a Landing page
             </div>
         </>
     )
