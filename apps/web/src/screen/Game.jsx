@@ -19,12 +19,15 @@ function Game(){
             console.log(message);
             switch(message.type){
                 case INIT_GAME:
+                    setBoard(new Chess())
                     console.log("Game Initiator");
                     break;
 
                 case MOVE:
+                    const move = message.payload;
                     console.log("Move made");
                     break;
+
                 case GAME_OVER:
                     console.log("Game over");
                     break;
