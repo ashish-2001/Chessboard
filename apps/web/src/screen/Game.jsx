@@ -8,6 +8,9 @@ function Game(){
                     <div>
                         <Chessboard/>
                     </div>
+                    <div>
+                        <button>Play</button>
+                    </div>
                 </div>
             </div>
         </div>
