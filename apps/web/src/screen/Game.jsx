@@ -1,6 +1,9 @@
-import { Chessboard } from "../components/Chessboard"
+import { useNavigate } from "react-router-dom";
+import { Button } from "../components/Button"
+import { Chessboard } from "../components/Chessboard";
 
 function Game(){
+    const navigate = useNavigate();
     return (
         <div className="flex justify-center">
             <div className="pt-8 max-w-3xl">
@@ -9,7 +12,7 @@ function Game(){
                         <Chessboard/>
                     </div>
                     <div className="col-span-2 bg-green-200 w-full">
-                        <button>Play</button>
+                        <Button onClick={() => { navigate("/game")}} children={"Play"}/>
                     </div>
                 </div>
             </div>
