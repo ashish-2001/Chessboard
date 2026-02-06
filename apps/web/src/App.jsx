@@ -1,7 +1,7 @@
 import './App.css';
 import { BrowserRouter, Route, Routes } from "react-router-dom";
-import { Landing } from './screen/Landing';
-import { Game } from './screen/Game';
+import { Landing } from './screen/Landing.jsx';
+import { Game } from './screen/Game.jsx';
 
 function App() {
 
@@ -17,4 +17,6 @@ function App() {
   )
 }
 
-export default App
+export {
+  App
+}

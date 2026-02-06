@@ -1,8 +1,10 @@
 function Landing(){
     return (
-        <div>
-            This is a landing page
-        </div>
+        <>
+            <div>
+                This is a Game page
+            </div>
+        </>
     )
 };
 
