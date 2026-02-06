@@ -7,7 +7,7 @@ function App() {
 
   return (
     <>
-      <BrowserRouter basename='/app'>
+      <BrowserRouter>
         <Routes>
           <Route path='/' element={<Landing/>}/>
           <Route path='/game' element={<Game/>}/>
