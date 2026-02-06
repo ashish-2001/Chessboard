@@ -32,15 +32,15 @@ export class GameManager {
                 this.pendingUsers = null;
             } else {
                     this.pendingUsers = socket;
-                }
-            }
+                };
+            };
 
             if(message.type === MOVE){
                 const game = this.games.find(g => g.player1 === socket || g.player2 === socket);
                 if(game){
                     game.makeMove(socket, message.payload);
-                }
-            }
+                };
+            };
         });
     };
 };
