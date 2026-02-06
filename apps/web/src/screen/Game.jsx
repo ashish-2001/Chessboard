@@ -32,7 +32,11 @@ function Game(){
             }
         }
     }, [socket]);
-    
+
+    if(!socket) {
+        return <div>Connecting...</div>
+    }
+
     return (
         <div className="flex justify-center">
             <div className="pt-8 max-w-3xl">
