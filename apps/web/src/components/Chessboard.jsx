@@ -1,6 +1,6 @@
 function Chessboard(){
     return (
-        <div>
+        <div className="tex-white-200">
             Chessboard
         </div>
     )
