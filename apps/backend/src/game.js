@@ -39,8 +39,7 @@ export class Game{
         }catch(e){
             console.log(e.message);
             return;
-        }
-        console.log("move succeeded")
+        };
 
         if(this.board.isGameOver()){
             this.player1.emit(JSON.stringify({
