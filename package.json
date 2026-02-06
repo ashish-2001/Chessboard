@@ -17,8 +17,10 @@
   "license": "ISC",
   "description": "",
   "dependencies": {
+    "@tailwindcss/vite": "^4.1.18",
     "dotenv": "^17.2.3",
     "express": "^5.2.1",
+    "tailwindcss": "^4.1.18",
     "turbo": "^2.8.3"
   }
 }
