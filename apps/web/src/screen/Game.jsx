@@ -4,4 +4,8 @@ function Game(){
             This is a Game page
         </div>
     )
+};
+
+export {
+    Game
 }
