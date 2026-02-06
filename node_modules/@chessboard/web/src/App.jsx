@@ -1,10 +1,15 @@
-import './App.css'
+import './App.css';
+import { BrowserRouter, Route, Routes } from "react-router-dom";
 
 function App() {
 
   return (
     <>
-      <button> Join Room</button>
+      <BrowserRouter basename='/app'>
+        <Routes>
+          <Route path='/'/>
+        </Routes>
+      </BrowserRouter>
     </>
   )
 }
