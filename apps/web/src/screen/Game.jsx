@@ -1,15 +1,14 @@
-import { useNavigate } from "react-router-dom";
 import { Button } from "../components/Button"
 import { Chessboard } from "../components/Chessboard";
 import { useSocket } from "../hooks/useSocket";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { GAME_OVER, INIT_GAME, MOVE } from "../../../backend/src/messages";
-
+import Chess from "chess.js";
 
 
 function Game(){
     const socket = useSocket();
-
+    const [board, setBoard] = useState(new Chess());
     useEffect(() => {
         if(!socket){
             return;
