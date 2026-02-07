@@ -5,19 +5,22 @@ import { Button } from "../components/Button";
 function Landing(){
 
     const navigate = useNavigate();
+
     return (
-        <div className="flex justify-content">
+        <div className="flex justify-center">
             <div className="pt-8 max-w-3xl">
                 <div className='grid grid-cols-1 gap-4 md:grid-cols-2'>
                     <div className="flex justify-center">
                         <img src={Chessboard} className="max-w-96"/>
                     </div>
                     <div className="pt-16">
-                        <div>
-                            <h1 className="text-4xl font-bold text-white">Play chess online on the Site!</h1>
-                        </div>
+                        <h1 className="text-4xl font-bold text-white">
+                            Play chess online on the Site!
+                        </h1>
                         <div className="mt-4 flex justify-center">
-                            <Button onClick={() => { navigate("/game")}} children={"Play Online"}/>
+                            <Button onClick={() => { navigate("/game")}}>
+                                Play Online
+                            </Button>
                         </div>
                     </div>
                 </div>
