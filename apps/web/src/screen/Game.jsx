@@ -16,15 +16,16 @@ function Game(){
             return;
         }
 
-        socket.onmessage = (event) => {
+        const handleMessage = (event) => {
             const message = JSON.parse(event.data);
 
             switch(message.type){
-                case INIT_GAME:
+                case INIT_GAME: {
                     setChess(new Chess())
                     setBoard(chess.board())
                     console.log("Game Initiator");
                     break;
+                }
                 case MOVE:
                     const move = message.payload;
                     chess.move(move)
