@@ -3,7 +3,7 @@ import { Chessboard } from "../components/Chessboard";
 import { useSocket } from "../hooks/useSocket";
 import { useEffect, useState } from "react";
 import { GAME_OVER, INIT_GAME, MOVE } from "../../../backend/src/messages";
-import Chess from "chess.js";
+import { Chess } from "chess.js";
 
 
 function Game(){
@@ -16,8 +16,8 @@ function Game(){
             return;
         }
 
-        socket.onmessage = (e) => {
-            const message = JSON.parse(e.data);
+        socket.onmessage = (event) => {
+            const message = JSON.parse(event.data);
 
             switch(message.type){
                 case INIT_GAME:
@@ -25,13 +25,11 @@ function Game(){
                     setBoard(chess.board())
                     console.log("Game Initiator");
                     break;
-
                 case MOVE:
                     const move = message.payload;
                     chess.move(move)
                     setBoard(chess.board())
                     break;
-
                 case GAME_OVER:
                     console.log("Game over");
                     break;
