@@ -8,7 +8,6 @@ export class Game{
         this.player2 = player2;
         this.board = new Chess();
         this.moveCount = 0;
-        this.startTime = new Date();
 
         this.player1.send(JSON.stringify({
             type: INIT_GAME,
@@ -33,41 +32,44 @@ export class Game{
         if(this.moveCount % 2 === 1 && socket !== this.player2){
             return;
         }
-        console.log("Did not early return")
+        
+        let result;
+
         try{
-            this.board.move(move);
+            result = this.board.move(move);
         }catch(e){
-            console.log(e.message);
+            console.log("Invalid move", e.message);
             return;
         };
 
+        if(!result) return;
+
         if(this.board.isGameOver()){
-            this.player1.emit(JSON.stringify({
+            const winner = this.board.turn() === "w" ? "black" : "white";
+
+            const payload = JSON.stringify({
                 type: GAME_OVER,
-                payload: {
-                    winner: this.board.turn() === "w" ? "black" : "white"
+                payload: { 
+                    winner
                 }
-            }))
-            this.player2.emit(JSON.stringify({
-                type: GAME_OVER,
-                payload: {
-                    winner: this.board.turn() === "w" ? "black" : "white"
-                }
-            }))
+            })
+
+            this.player1.send(payload);
+
+            this.player2.send(payload);
+
             return;
         }
 
-        if(this.moveCount % 2 === 0){
-            this.player2.send(JSON.stringify({
+        const opponent = socket === this.player1 ? this.player2 : this.player1;
+
+        opponent.send(
+            JSON.stringify({
                 type: MOVE,
                 payload: move
-            }));
-        } else {
-            this.player1.send(JSON.stringify({
-                type: MOVE,
-                payload: move
-            }));
-        };
+            })
+        );
+        
         this.moveCount++;
     };
 };
