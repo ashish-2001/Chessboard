@@ -9,7 +9,7 @@ import { Chess } from "chess.js";
 function Game(){
     const socket = useSocket();
     const [chess, setChess] = useState(new Chess());
-    const [board, setBoard] = useState();
+    const [board, setBoard] = useState(null);
 
     useEffect(() => {
         if(!socket){
@@ -21,35 +21,44 @@ function Game(){
 
             switch(message.type){
                 case INIT_GAME: {
-                    setChess(new Chess())
-                    setBoard(chess.board())
+                    const newChess = new Chess();
+                    setChess(newChess)
+                    setBoard(newChess.board())
                     console.log("Game Initiator");
                     break;
                 }
                 case MOVE:
-                    const move = message.payload;
-                    chess.move(move)
-                    setBoard(chess.board())
+                    setChess((prevChess) => {
+                        const newChess = new Chess(prevChess.fen());
+                        newChess.move(message.payload);
+                        setBoard(newChess.board())
+                        return newChess;
+                    });
                     break;
                 case GAME_OVER:
-                    console.log("Game over");
                     break;
             }
         }
+
+        socket.addEventlistener("message", handleMessage);
+
+        return () => {
+            socket.removeEventListener("message", handleMessage);
+        };
     }, [socket]);
 
     if(!socket) {
         return <div>Connecting...</div>
-    }
+    };
 
     return (
         <div className="flex justify-center">
-            <div className="pt-8 max-w-3xl">
-                <div className="grid grid-cols-6 gap-4 md:grid-cols-2 w-full">
-                    <div className="cols-span-4 bg-red-200 w-full">
+            <div className="pt-8 max-w-3xl w-full">
+                <div className="grid grid-cols-6 gap-4 md:grid-cols-2">
+                    <div className="cols-span-4 bg-red-200 p-4">
                         <Chessboard board={board}/>
                     </div>
-                    <div className="col-span-2 bg-green-200 w-full">
+                    <div className="col-span-2 bg-green-200 p-4 flex items-start">
                         <Button onClick={() => { socket.send(JSON.stringify({
                             type: INIT_GAME
                         }))}}>Play</Button>
