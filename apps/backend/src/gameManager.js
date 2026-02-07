@@ -3,7 +3,7 @@ import { INIT_GAME, MOVE } from "./messages.js";
 
 export class GameManager {
 
-    constructor(games, pendingUsers, users){
+    constructor(){
         this.games = [];
         this.pendingUsers = null;
         this.users = []
@@ -19,6 +19,8 @@ export class GameManager {
         if(this.pendingUsers === socket){
             this.pendingUsers = null;
         }
+
+        this.games = this.filter((g) => g.player1 !== socket && g.player2 !== socket );
     }
 
     addHandler(socket){
