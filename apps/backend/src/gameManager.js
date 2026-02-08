@@ -20,7 +20,7 @@ export class GameManager {
             this.pendingUsers = null;
         }
 
-        this.games = this.filter((g) => g.player1 !== socket && g.player2 !== socket );
+        this.games = this.games.filter((g) => g.player1 !== socket && g.player2 !== socket );
     }
 
     addHandler(socket){
