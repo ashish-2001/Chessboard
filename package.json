@@ -1,26 +1,24 @@
 {
   "name": "chessboard",
   "version": "1.0.0",
-  "main": "index.js",
-  "private": true,
-  "workspaces": [
-    "apps/*",
-    "packages/*"
-  ],
+  "main": "app.js",
   "scripts": {
-    "dev:web": "npm run dev --workspace=@chessboard/web",
-    "dev:backend": "npm install --workspaces=@chessboard/backend",
-    "dev": "npm run dev:backend & npm run dev:web"
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ashish-2001/Chessboard.git"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/ashish-2001/Chessboard/issues"
+  },
+  "homepage": "https://github.com/ashish-2001/Chessboard#readme",
   "description": "",
   "dependencies": {
-    "@tailwindcss/vite": "^4.1.18",
-    "dotenv": "^17.2.3",
-    "express": "^5.2.1",
-    "tailwindcss": "^4.1.18",
-    "turbo": "^2.8.3"
+    "chess.js": "^1.4.0",
+    "express": "^5.2.1"
   }
 }
