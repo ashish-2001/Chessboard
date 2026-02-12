@@ -7,44 +7,54 @@ import { Chess } from "chess.js";
 
 
 function Game(){
-    const socket = useSocket();
+    const socket = useSocket(onmessage);
     const [chess, setChess] = useState(new Chess());
     const [board, setBoard] = useState(null);
+    const [started, setStarted] = useState(false);
 
     useEffect(() => {
         if(!socket){
             return;
         }
 
-        const handleMessage = (event) => {
+        socket.onmessage = (event) => {
             const message = JSON.parse(event.data);
 
             switch(message.type){
                 case INIT_GAME: {
-                    const newChess = new Chess();
-                    setChess(newChess)
-                    setBoard(newChess.board())
-                    console.log("Game Initiator");
+                    const newChess = new Chess()
+                    setChess(newChess);
+                    setBoard(newChess.board());
+                    setStarted(true);
                     break;
                 }
-                case MOVE:
-                    setChess((prevChess) => {
-                        const newChess = new Chess(prevChess.fen());
-                        newChess.move(message.payload);
-                        setBoard(newChess.board())
-                        return newChess;
-                    });
+
+                case MOVE: {
+                    const move = message.payload
+
+                    setChess(prev => {
+                        const updated = new Chess(prev.fen());
+                        try{
+                            const appliedMove = updated.move(move);
+                            if(!appliedMove){
+                                console.warn("Invalid move received from server:", move);
+                                return prev;
+                            }
+                        }catch(e){
+                            console.warn("Caught invalid move:", move, e)
+                            return prev;
+                        }
+
+                        setBoard(updated.board());
+                        return updated;
+                    })
                     break;
-                case GAME_OVER:
+                }
+
+                case GAME_OVER: 
                     break;
             }
         }
-
-        socket.addEventListener("message", handleMessage);
-
-        return () => {
-            socket.removeEventListener("message", handleMessage);
-        };
     }, [socket]);
 
     if(!socket) {
@@ -56,13 +66,15 @@ function Game(){
             <div className="pt-8 max-w-3xl w-full flex justify-center h-full">
                 <div className="grid grid-cols-6 gap-4 w-full justify-center items-center">
                     <div className="col-span-4 w-full flex justify-center">
-                        <Chessboard board={board}/>
+                        <Chessboard chess={chess} setBoard={setBoard} board={board} socket={socket}/>
                     </div>
-                    <div className="col-span-2 bg-green-200 w-full h-100 ">
+                    <div className="col-span-2 bg-slate-800 w-full h-100 ">
                         <div className="mt-10">
-                            <Button onClick={() => { socket.send(JSON.stringify({
-                                type: INIT_GAME
-                            }))}}>Play</Button>
+                            { !started && <Button onClick={() => { 
+                                    socket.send(JSON.stringify({
+                                    type: INIT_GAME
+                                }
+                            ))}}>Play</Button>}
                         </div>
                     </div>
                 </div>
