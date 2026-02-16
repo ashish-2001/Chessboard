@@ -1,5 +1,5 @@
 import { Chess } from "chess.js";
-import { GAME_OVER } from "./messages";
+import { GAME_OVER, MOVE } from "./messages";
 
 class Game {
     constructor(player1, player2){
@@ -19,16 +19,35 @@ class Game {
         if(this.board.length % 2 === 1 && socket !== this.player2){
             return;
         }
+
+        let move;
         try{
-            this.board.move(move)
+
+            move = this.board.move({ from, to });
         } catch(e){
             return;
         }
 
         if(this.board.isGameOver()){
             this.player1.emit(JSON.stringify({
-                type: GAME_OVER
+                type: GAME_OVER,
+                payload: {
+                    winner: this.board.turn() === "w" ? "black" : "white"
+                }
             }));
+            return;
+        }
+
+        if(this.board.moves.length % 2 === 0){
+            this.player2.emit(JSON.stringify({
+                type: MOVE,
+                payload: move
+            }));
+        } else {
+            this.player1.emit(JSON.stringify({
+                type: MOVE,
+                payload: move
+            }))
         }
     }
 }; 
