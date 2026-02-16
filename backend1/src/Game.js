@@ -6,4 +6,4 @@ class Game {
         this.moves = [];
         this.startTime = new Date();
     }
-}
+};
