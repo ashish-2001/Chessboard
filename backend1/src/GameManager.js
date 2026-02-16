@@ -1,3 +1,5 @@
+import { INIT_GAME } from "./messages";
+
 class GameManager {
     constructor(){
         this.games = [];
@@ -18,8 +20,12 @@ class GameManager {
         socket.on("message", (data) => {
             const message = JSON.parse(data.toString());
 
-            if(message.type ==="init_game"){
-                this.joinGame(socket);
+            if(message.type === INIT_GAME){
+                if(this.pendingUser){
+                    
+                } else {
+                    this.pendingUser = socket;
+                }
             }
         })
     }
