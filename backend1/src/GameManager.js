@@ -24,9 +24,14 @@ class GameManager {
                 if(this.pendingUser){
                     const game = new Game(this.pendingUser, socket);
                     this.games.push(game);
+                    this.pendingUser = null;
                 } else {
                     this.pendingUser = socket;
                 }
+            }
+
+            if(message.type === "move"){
+
             }
         })
     }
