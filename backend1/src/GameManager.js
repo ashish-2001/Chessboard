@@ -1,4 +1,4 @@
-import { INIT_GAME } from "./messages";
+import { INIT_GAME, MOVE } from "./messages";
 
 class GameManager {
     constructor(){
@@ -30,8 +30,11 @@ class GameManager {
                 }
             }
 
-            if(message.type === "move"){
-
+            if(message.type === MOVE){
+                const game = this.games.find(game => game.player1 === socket || game.player2 === socket);
+                if(game){
+                    game.makeMove(message.move);
+                }
             }
         })
     }
