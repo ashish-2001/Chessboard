@@ -1,5 +1,5 @@
 import { Chess } from "chess.js";
-import { GAME_OVER, MOVE } from "./messages";
+import { GAME_OVER, INIT_GAME, MOVE } from "./messages";
 
 class Game {
     constructor(player1, player2){
@@ -8,6 +8,20 @@ class Game {
         this.board = new Chess();
         this.moves = [];
         this.startTime = new Date();
+
+        this.player1.send(JSON.stringify({
+            type: INIT_GAME,
+            payload: {
+                color: "white"
+            }
+        }));
+
+        this.player2.send(JSON.stringify({
+            type: INIT_GAME,
+            payload: {
+                color: "black"
+            }
+        }));
     }
 
     makeMove(socket, { from, to }){
