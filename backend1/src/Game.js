@@ -1,4 +1,5 @@
 import { Chess } from "chess.js";
+import { GAME_OVER } from "./messages";
 
 class Game {
     constructor(player1, player2){
@@ -25,9 +26,9 @@ class Game {
         }
 
         if(this.board.isGameOver()){
-            this.player1.emit({
+            this.player1.emit(JSON.stringify({
                 type: GAME_OVER
-            })
+            }));
         }
     }
 }; 
