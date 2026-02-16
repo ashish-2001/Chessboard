@@ -6,4 +6,10 @@ class Game {
         this.moves = [];
         this.startTime = new Date();
     }
+
+    makeMove(socket, move){
+        if(socket === this.player1 || socket === this.player2){
+            
+        }
+    }
 };
