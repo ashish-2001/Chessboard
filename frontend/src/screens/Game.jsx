@@ -13,7 +13,7 @@ const GAME_OVER = "game_over";
 function Game(){
     let socket = useSocket();
     const [chess, setChess] = useState(new Chess());
-    const [board, setBoard] = useState(board.board());
+    const [board, setBoard] = useState(chess.board());
 
     useEffect(() => {
 
