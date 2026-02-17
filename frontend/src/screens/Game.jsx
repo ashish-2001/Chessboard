@@ -49,7 +49,7 @@ function Game(){
         <div  className="flex justify-center">
             <div className="pt-8 max-w-5xl w-full">
                 <div className="grid grid-cols-6 gap-4 w-full">
-                    <div className="grid-cols-span-4 bg-red-200 w-full flex justify-center">
+                    <div className="grid-cols-span-4  w-full flex justify-center">
                         <Chessboard board={board}/>
                     </div>
                     <div className="col-span-2 bg-green-200 w-full">
