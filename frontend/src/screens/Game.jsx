@@ -3,6 +3,8 @@ import { Button } from "../components/Button"
 import { Chessboard } from "../components/Chessboard"
 import { useSocket } from "../hooks/useSocket"
 import { useEffect, useState } from "react";
+import { Chess } from "chess.js";
+
 
 const INIT_GAME = "init_game";
 const MOVE = "move";
@@ -11,7 +13,8 @@ const GAME_OVER = "game_over";
 
 function Game(){
     let socket = useSocket();
-    const [board, setBoard] = useState([]);
+    const [chess, setChess] = useState(new Chess());
+    const [board, setBoard] = useState(board.board());
 
     useEffect(() => {
 
@@ -21,18 +24,23 @@ function Game(){
 
         socket.onmessage = (event) => {
             const message = JSON.parse(event.data);
-            console.log(message);
 
             switch (message.type){
                 case INIT_GAME: 
+                    setChess(new Chess());
+                    setBoard(chess.board());
                     break;
-                case MOVE:
+                case MOVE: {
+                    const move = message.payload
+                    chess.move(move);
+                    setBoard(chess.board());
                     break;
+                }
                 case GAME_OVER:
                     break;
             }
         }
-    }, [socket]);
+    }, [socket, board, chess]);
 
 
     if(!socket){
@@ -43,7 +51,7 @@ function Game(){
             <div className="pt-8 max-w-5xl w-full">
                 <div className="grid grid-cols-6 gap-4 w-full">
                     <div className="grid-cols-span-4 bg-red-200 w-full">
-                        <Chessboard />
+                        <Chessboard board={board}/>
                     </div>
                     <div className="col-span-2 bg-green-200 w-full">
                         <Button onClick={() => {
