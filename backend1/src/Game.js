@@ -57,13 +57,15 @@ class Game {
             }));
             return;
         }
-
+        console.log(this.board.moves.length % 2);
         if(this.board.moves.length % 2 === 0){
+            console.log("Sent 1");
             this.player2.emit(JSON.stringify({
                 type: MOVE,
                 payload: move
             }));
         } else {
+            console.log("Sent 2");
             this.player1.emit(JSON.stringify({
                 type: MOVE,
                 payload: move
