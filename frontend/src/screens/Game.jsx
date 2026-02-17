@@ -1,4 +1,3 @@
-import { Navigate } from "react-router-dom"
 import { Button } from "../components/Button"
 import { Chessboard } from "../components/Chessboard"
 import { useSocket } from "../hooks/useSocket"
