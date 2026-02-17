@@ -14,9 +14,10 @@ function Game(){
     let socket = useSocket();
     const [chess, setChess] = useState(new Chess());
     const [board, setBoard] = useState(chess.board());
+    const [stared, setStarted] = useState(false) ;
+
 
     useEffect(() => {
-
         if(!socket){
             return;
         }
@@ -26,7 +27,7 @@ function Game(){
 
             switch (message.type){
                 case INIT_GAME: 
-                    
+                    setStarted(true);
                     setBoard(chess.board());
                     break;
                 case MOVE: {
@@ -54,13 +55,13 @@ function Game(){
                     </div>
                     <div className="col-span-2 bg-slate-800 w-1/2 flex justify-center">
                         <div className="pt-8">
-                            <Button onClick={() => {
+                            {!stared && <Button onClick={() => {
                                 socket.send(JSON.stringify({
                                     type: INIT_GAME
                                 }))
                             }}>
                                 Play
-                            </Button>
+                            </Button>}
                         </div>
                     </div>
                 </div>
