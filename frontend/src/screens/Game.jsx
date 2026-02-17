@@ -1,3 +1,5 @@
+import { Navigate } from "react-router-dom"
+import { Button } from "../components/Button"
 import { Chessboard } from "../components/Chessboard"
 
 function Game(){
@@ -10,7 +12,9 @@ function Game(){
                         <Chessboard />
                     </div>
                     <div className="col-span-2 bg-green-200 w-full">
-
+                        <Button onClick={() => Navigate("/game")}>
+                            Play
+                        </Button>
                     </div>
                 </div>
             </div>
