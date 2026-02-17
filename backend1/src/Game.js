@@ -69,5 +69,5 @@ class Game {
                 payload: move
             }))
         }
-    }
+    };
 }; 
