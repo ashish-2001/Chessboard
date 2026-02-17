@@ -33,14 +33,14 @@ class Game {
         if(this.board.length % 2 === 1 && socket !== this.player2){
             return;
         }
-
+        console.log("Did not early return");
         let move;
         try{
-
             move = this.board.move({ from, to });
         } catch(e){
             return;
         }
+        console.log("Move succeeded");
 
         if(this.board.isGameOver()){
             this.player1.emit(JSON.stringify({
