@@ -1,15 +1,19 @@
-import './App.css'
+import './App.css';
+import { BrowserRouter, Routes, Route } from 'react-router-dom';
 
 function App() {
   
 
   return (
     <>
-      <div>
-        Join Room
-      </div>
+      <BrowserRouter>
+        <Routes>
+          <Route path="/" element={<Landing/>}/>
+          <Route path="/game" element={<Game/>}/>
+        </Routes>
+      </BrowserRouter>
     </>
   )
 }
 
-export default App
+export default App;
