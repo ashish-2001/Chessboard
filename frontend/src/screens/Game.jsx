@@ -52,7 +52,7 @@ function Game(){
                     <div className="grid-cols-span-4  w-full flex justify-center">
                         <Chessboard board={board}/>
                     </div>
-                    <div className="col-span-2 bg-green-200 w-full">
+                    <div className="col-span-2 bg-green-200 w-full flex justify-center">
                         <Button onClick={() => {
                             socket.send(JSON.stringify({
                                 type: INIT_GAME
