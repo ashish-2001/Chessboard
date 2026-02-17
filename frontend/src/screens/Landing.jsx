@@ -13,7 +13,7 @@ function Landing(){
                                 Play chess online on the #3 site.
                             </h1>
                         </div>
-                        <div className="mt-4 flex justify-center">
+                        <div className="mt-8 flex justify-center">
                             <button className="px-8 py-4 text-2xl bg-green-500 hover:bg-green-700 text-white font-bold rounded">
                                 Play Now
                             </button>
