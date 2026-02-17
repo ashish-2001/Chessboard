@@ -26,7 +26,7 @@ function Game(){
 
             switch (message.type){
                 case INIT_GAME: 
-                    setChess(new Chess());
+                    
                     setBoard(chess.board());
                     break;
                 case MOVE: {
