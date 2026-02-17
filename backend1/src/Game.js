@@ -1,5 +1,5 @@
 import { Chess } from "chess.js";
-import { GAME_OVER, INIT_GAME, MOVE } from "./messages";
+import { GAME_OVER, INIT_GAME, MOVE } from "./messages.js";
 
 class Game {
     constructor(player1, player2){
