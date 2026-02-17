@@ -1,7 +1,7 @@
 import { useState } from "react"
 import { MOVE } from "../../../backend1/src/messages";
 
-function Chessboard({ board, socket }){
+function Chessboard({ board, socket, setBoard }){
 
     const [from, setFrom] = useState(null);
 
@@ -23,7 +23,9 @@ function Chessboard({ board, socket }){
                                         to: squareRepresentation
                                     }
                                 }));
-                                setFrom(null)
+                                setFrom(null);
+                                chess.move(move);
+                                setBoard(chess.board());
                                 console.log({ from, to: squareRepresentation });
                             }
                         }} className={`w-16 h-16 ${(i+j)%2 === 0 ? 'bg-green-500' : 'bg-white'}`}> 
