@@ -32,10 +32,8 @@ class GameManager {
             }
 
             if(message.type === MOVE){
-                console.log("Inside move");
                 const game = this.games.find(game => game.player1 === socket || game.player2 === socket);
                 if(game){
-                    console.log("Inside make move");
                     game.makeMove(socket, message.payload.move);
                 }
             }

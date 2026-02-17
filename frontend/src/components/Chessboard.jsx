@@ -30,12 +30,11 @@ function Chessboard({ board, socket, setBoard, chess }){
                                     to: squareRepresentation
                                 });
                                 setBoard(chess.board());
-                                console.log({ from, to: squareRepresentation });
                             }
-                        }} className={`w-16 h-16 ${(i+j)%2 === 0 ? 'bg-green-500' : 'bg-white'}`}> 
+                        }} className={`w-16 h-16 ${(i+j)%2 === 0 ? 'bg-green-500' : 'bg-slate-100'}`}> 
                             <div className="w-full justify-center flex h-full">
                                 <div className="h-full justify-center flex flex-col">
-                                    {square ? <img className="w-4" src={`/${square?.color ==="b" ? square?.type : `${square?.type?.toUpperCase()} copy`}.png`}/> : null}
+                                    {square ? <img className="w-10" src={`/${square?.color ==="b" ? square?.type : `${square?.type?.toUpperCase()} copy`}.png`}/> : null}
                                 </div>
                             </div>
                         </div>
