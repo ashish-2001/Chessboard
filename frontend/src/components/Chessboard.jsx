@@ -4,27 +4,27 @@ import { MOVE } from "../../../backend1/src/messages";
 function Chessboard({ board, socket }){
 
     const [from, setFrom] = useState(null);
-    const [to, setTo] = useState(null);
 
     return(
         <div className="text-white-200">
             {board.map((row, i) => {
                 return <div key={i} className="flex ">
                     {row.map((square, j) => {
+                        const squareRepresentation = String.fromCharCode(97 + (j % 8)) + "" + (8 - i);
                         return <div key={j} onClick={() => {
                             if(!from){
-                                setFrom(square?.square ?? null);
+                                setFrom(squareRepresentation);
                             } else {
                                 
                                 socket.send(JSON.stringify({
                                     type: MOVE,
                                     payload: {
                                         from,
-                                        to: square?.square
+                                        to: squareRepresentation
                                     }
                                 }));
                                 setFrom(null)
-                                console.log({ from, to: square?.square });
+                                console.log({ from, to: squareRepresentation });
                             }
                         }} className={`w-16 h-16 ${(i+j)%2 === 0 ? 'bg-green-500' : 'bg-white'}`}> 
                             <div className="w-full justify-center flex h-full">
