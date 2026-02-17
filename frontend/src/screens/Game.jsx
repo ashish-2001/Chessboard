@@ -1,9 +1,40 @@
 import { Navigate } from "react-router-dom"
 import { Button } from "../components/Button"
 import { Chessboard } from "../components/Chessboard"
+import { useSocket } from "../hooks/useSocket"
+import { useEffect } from "react";
+
+const INIT_GAME = "init_game";
+const MOVE = "move";
+const GAME_OVER = "game_over";
+
 
 function Game(){
+    const socket = useSocket();
 
+    useEffect(() => {
+        if(!socket){
+            return;
+        }
+        socket.onmessage = (event) => {
+            const message = JSON.parse(event.data);
+            console.log(message);
+
+            switch (message.type){
+                case INIT_GAME: 
+                    break;
+                case MOVE:
+                    break;
+                case GAME_OVER:
+                    break;
+            }
+        }
+    }, [socket]);
+
+    
+    if(!socket){
+        return <div>Connecting...</div>
+    }
     return (
         <div  className="flex justify-center">
             <div className="pt-8 max-w-5xl w-full">
@@ -12,7 +43,11 @@ function Game(){
                         <Chessboard />
                     </div>
                     <div className="col-span-2 bg-green-200 w-full">
-                        <Button onClick={() => Navigate("/game")}>
+                        <Button onClick={() => {
+                            socket.send(JSON.stringify({
+                                type: INIT_GAME
+                            }))
+                        }}>
                             Play
                         </Button>
                     </div>
@@ -24,5 +59,8 @@ function Game(){
 };
 
 export {
+    INIT_GAME,
+    MOVE,
+    GAME_OVER,
     Game
 }
