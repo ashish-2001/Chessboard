@@ -15,15 +15,16 @@ function Chessboard({ board, socket }){
                             if(!from){
                                 setFrom(square?.square ?? null);
                             } else {
-                                setTo(square?.square ?? null);
+                                
                                 socket.send(JSON.stringify({
                                     type: MOVE,
                                     payload: {
                                         from,
-                                        to
+                                        to: square?.square
                                     }
-                                }))
-                                console.log({ from, to });
+                                }));
+                                setFrom(null)
+                                console.log({ from, to: square?.square });
                             }
                         }} className={`w-16 h-16 ${(i+j)%2 === 0 ? 'bg-green-500' : 'bg-white'}`}> 
                             <div className="w-full justify-center flex h-full">
