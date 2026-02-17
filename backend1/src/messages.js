@@ -7,4 +7,4 @@ export {
     INIT_GAME,
     MOVE,
     GAME_OVER
-}
+};
