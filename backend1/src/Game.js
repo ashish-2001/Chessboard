@@ -26,7 +26,7 @@ class Game {
 
     makeMove(socket, { from, to }){
         console.log(this.board.moves().length);
-        if(this.board.length % 2 === 0 && socket !== this.player1){
+        if(this.board.moves().length % 2 === 0 && socket !== this.player1){
             console.log("Early return 1");
             return;
         }
