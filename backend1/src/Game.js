@@ -8,6 +8,7 @@ class Game {
         this.board = new Chess();
         this.moves = [];
         this.startTime = new Date();
+        this.moveCount = 0;
 
         this.player1.send(JSON.stringify({
             type: INIT_GAME,
@@ -25,25 +26,21 @@ class Game {
     };
 
     makeMove(socket, { from, to }){
-        console.log(this.board.moves().length);
-        console.log(this.board.moves());
-        if(this.board.moves().length % 2 === 0 && socket !== this.player1){
-            console.log("Early return 1");
+    
+        if(this.moveCount % 2 === 0 && socket !== this.player1){
             return;
         }
 
-        if(this.board.moves().length % 2 === 1 && socket !== this.player2){
-            console.log("Early return 2");
+        if(this.moveCount % 2 === 1 && socket !== this.player2){
             return;
         }
-        console.log("Did not early return");
+        
         let move;
         try{
             move = this.board.move({ from, to });
         } catch(e){
             return;
         }
-        console.log("Move succeeded");
 
         if(this.board.isGameOver()){
             this.player1.emit(JSON.stringify({
@@ -60,20 +57,18 @@ class Game {
             }));
             return;
         }
-        console.log(this.board.moves().length % 2);
-        if(this.board.moves().length % 2 === 0){
-            console.log("Sent 1");
+        if(this.moveCount % 2 === 0){
             this.player2.send(JSON.stringify({
                 type: MOVE,
                 payload: move
             }));
         } else {
-            console.log("Sent 2");
             this.player1.send(JSON.stringify({
                 type: MOVE,
                 payload: move
             }))
         }
+        this.moveCount++;
     };
 }; 
 
