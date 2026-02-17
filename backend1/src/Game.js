@@ -25,12 +25,14 @@ class Game {
     };
 
     makeMove(socket, { from, to }){
-
+        console.log(this.board.moves().length);
         if(this.board.length % 2 === 0 && socket !== this.player1){
+            console.log("Early return 1");
             return;
         }
 
-        if(this.board.length % 2 === 1 && socket !== this.player2){
+        if(this.board.moves().length % 2 === 1 && socket !== this.player2){
+            console.log("Early return 2");
             return;
         }
         console.log("Did not early return");
@@ -57,16 +59,16 @@ class Game {
             }));
             return;
         }
-        console.log(this.board.moves.length % 2);
-        if(this.board.moves.length % 2 === 0){
+        console.log(this.board.moves().length % 2);
+        if(this.board.moves().length % 2 === 0){
             console.log("Sent 1");
-            this.player2.emit(JSON.stringify({
+            this.player2.send(JSON.stringify({
                 type: MOVE,
                 payload: move
             }));
         } else {
             console.log("Sent 2");
-            this.player1.emit(JSON.stringify({
+            this.player1.send(JSON.stringify({
                 type: MOVE,
                 payload: move
             }))
