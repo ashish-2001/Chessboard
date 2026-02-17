@@ -41,8 +41,8 @@ class GameManager {
     handleMessage(){
 
     }
-}
+};
 
 export {
     GameManager
-}
+};
