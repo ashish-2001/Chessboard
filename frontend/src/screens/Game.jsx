@@ -1,3 +1,5 @@
+import { Chessboard } from "../components/Chessboard"
+
 function Game(){
 
     return (
