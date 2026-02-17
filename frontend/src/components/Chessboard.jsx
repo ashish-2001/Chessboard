@@ -15,12 +15,13 @@ function Chessboard({ board, socket, setBoard, chess }){
                             if(!from){
                                 setFrom(squareRepresentation);
                             } else {
-                                
                                 socket.send(JSON.stringify({
                                     type: MOVE,
                                     payload: {
-                                        from,
-                                        to: squareRepresentation
+                                        move: {
+                                            from,
+                                            to: squareRepresentation
+                                        }
                                     }
                                 }));
                                 setFrom(null);
