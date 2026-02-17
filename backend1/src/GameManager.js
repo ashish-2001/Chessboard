@@ -1,3 +1,4 @@
+import { Game } from "./Game";
 import { INIT_GAME, MOVE } from "./messages";
 
 class GameManager {
@@ -37,9 +38,6 @@ class GameManager {
                 }
             }
         })
-    }
-    handleMessage(){
-
     }
 };
 
