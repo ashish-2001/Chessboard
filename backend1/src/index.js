@@ -1,7 +1,9 @@
 import { WebSocketServer } from "ws";
 import { GameManager } from "./GameManager.js";
 
-const wss = new WebSocketServer({ port: 8080 });
+const PORT = process.env.PORT || 8000;
+
+const wss = new WebSocketServer({ PORT });
 const gameManager = new GameManager();
 
 wss.on("connection", function connection(ws){
