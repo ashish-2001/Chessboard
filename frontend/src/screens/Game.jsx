@@ -2,7 +2,7 @@ import { Navigate } from "react-router-dom"
 import { Button } from "../components/Button"
 import { Chessboard } from "../components/Chessboard"
 import { useSocket } from "../hooks/useSocket"
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 
 const INIT_GAME = "init_game";
 const MOVE = "move";
@@ -10,12 +10,15 @@ const GAME_OVER = "game_over";
 
 
 function Game(){
-    const socket = useSocket();
+    let socket = useSocket();
+    const [board, setBoard] = useState([]);
 
     useEffect(() => {
+
         if(!socket){
             return;
         }
+
         socket.onmessage = (event) => {
             const message = JSON.parse(event.data);
             console.log(message);
@@ -31,7 +34,7 @@ function Game(){
         }
     }, [socket]);
 
-    
+
     if(!socket){
         return <div>Connecting...</div>
     }
