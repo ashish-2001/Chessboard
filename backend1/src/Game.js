@@ -22,7 +22,7 @@ class Game {
                 color: "black"
             }
         }));
-    }
+    };
 
     makeMove(socket, { from, to }){
 
