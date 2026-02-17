@@ -71,3 +71,7 @@ class Game {
         }
     };
 }; 
+
+export {
+    Game
+}
