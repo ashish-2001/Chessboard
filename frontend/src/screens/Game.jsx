@@ -53,7 +53,7 @@ function Game(){
                         <Chessboard board={board}/>
                     </div>
                     <div className="col-span-2 bg-green-200 w-full flex justify-center">
-                        <div>
+                        <div className="pt-8">
                             <Button onClick={() => {
                                 socket.send(JSON.stringify({
                                     type: INIT_GAME
