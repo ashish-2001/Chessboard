@@ -50,7 +50,7 @@ function Game(){
             <div className="pt-8 max-w-5xl w-full">
                 <div className="flex justify-center gap-4 w-full">
                     <div className="grid-cols-span-4 w-full flex justify-center">
-                        <Chessboard socket={socket} board={board}/>
+                        <Chessboard setBoard={setBoard} socket={socket} board={board}/>
                     </div>
                     <div className="col-span-2 bg-slate-800 w-1/2 flex justify-center">
                         <div className="pt-8">
