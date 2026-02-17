@@ -1,7 +1,7 @@
 import { useState } from "react"
 import { MOVE } from "../../../backend1/src/messages";
 
-function Chessboard({ board, socket, setBoard }){
+function Chessboard({ board, socket, setBoard, chess }){
 
     const [from, setFrom] = useState(null);
 
@@ -24,7 +24,10 @@ function Chessboard({ board, socket, setBoard }){
                                     }
                                 }));
                                 setFrom(null);
-                                chess.move(move);
+                                chess.move({
+                                    from,
+                                    to: squareRepresentation
+                                });
                                 setBoard(chess.board());
                                 console.log({ from, to: squareRepresentation });
                             }
