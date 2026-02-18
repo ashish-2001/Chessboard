@@ -34,8 +34,15 @@ class Game {
         const bothAllowed = this.videoPermission.get(this.player1) && this.videoPermission.get(this.player2);
 
         if(bothAllowed){
-            this.player1.send(JSON.stringify({ type: "start_video" }));
-            this.player2.send(JSON.stringify({ type: "start_video" }));
+            this.player1.send(JSON.stringify({ 
+                type: "start_video", 
+                payload: { role: "caller" }
+            }));
+
+            this.player2.send(JSON.stringify({ 
+                type: "start_video",
+                payload: { role: "callee" }
+            }));
         }
     }
 

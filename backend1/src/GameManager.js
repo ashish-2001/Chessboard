@@ -1,5 +1,5 @@
 import { Game } from "./Game.js";
-import { INIT_GAME, MOVE, WEBRCT_ANSWER, WEBRTC_ICE, WEBRTC_OFFER, VIDEO_PERMISSION } from "./messages.js";
+import { INIT_GAME, MOVE, WEBRTC_ANSWER, WEBRTC_ICE, WEBRTC_OFFER, VIDEO_PERMISSION } from "./messages.js";
 
 class GameManager {
     constructor(){
@@ -46,7 +46,7 @@ class GameManager {
                     return;
                 }
 
-                const opponent = game.player1 === socket ? game.player2 : g.player1;
+                const opponent = game.player1 === socket ? game.player2 : game.player1;
 
                 opponent.send(JSON.stringify(message));
             }
