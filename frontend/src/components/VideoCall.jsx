@@ -86,3 +86,7 @@ function VideoCall({ socket }){
         </div>
     )
 }
+
+export {
+    VideoCall
+}
