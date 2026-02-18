@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 
-const WS_URL = process.env.URL
+const WS_URL = import.meta.env.VITE_WS_URL
 
 function useSocket(){
     const [socket, setSocket] = useState(null);
