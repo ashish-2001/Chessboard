@@ -2,9 +2,15 @@ const INIT_GAME = "init_game";
 const MOVE = "move";
 const GAME_OVER = "game_over";
 
+const WEBRTC_OFFER = "webrtc_offer";
+const WEBRCT_ANSWER = "webrtc_answer";
+const WEBRTC_ICE = "webrtc_ice";
 
 export {
     INIT_GAME,
     MOVE,
-    GAME_OVER
+    GAME_OVER,
+    WEBRTC_OFFER,
+    WEBRCT_ANSWER,
+    WEBRTC_ICE
 };
