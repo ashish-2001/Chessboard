@@ -1,17 +1,16 @@
 import { useEffect, useRef } from "react";
-import { WEBRCT_ANSWER, WEBRTC_ICE, WEBRTC_OFFER } from "../../../backend1/src/messages";
-import { Button } from "./Button";
+import { WEBRTC_ANSWER, WEBRTC_ICE, WEBRTC_OFFER } from "../../../backend1/src/messages";
 
 function VideoCall({ socket }){
     const localVideo = useRef();
     const remoteVideo = useRef();
     const peerRef = useRef(null);
+    const streamRef = useRef(null);
 
 
     useEffect(() => {
-        if(!socket){
-            return;
-        }
+
+        if(!socket || !enabled) return;
 
         const peer = new RTCPeerConnection({
             iceServers: [{ urls: "stun:stun.1.google.com:19302" }]
@@ -19,9 +18,13 @@ function VideoCall({ socket }){
 
         peerRef.current = peer;
 
-        navigator.mediaDevices.getUserMedia({ video: true, audio: true }).then(stream => {
+        navigator.mediaDevices
+        .getUserMedia({ video: true, audio: true })
+        .then(stream => {
+            streamRef.current = stream;
             localVideo.current.srcObject = stream;
-            stream.getTracks().forEach(track => peer.addTrack(track, stream))
+            stream.getTracks().forEach(track => 
+                peer.addTrack(track, stream))
         });
 
         peer.ontrack = e => {
@@ -37,45 +40,51 @@ function VideoCall({ socket }){
                     })
                 )
             }
-        }
+        };
 
-        socket.onmessage = async event => {
+        const handleMessage = async event => {
             const msg = JSON.parse(event.data);
 
             if(msg.type === WEBRTC_OFFER){
                 await peer.setRemoteDescription(msg.payload);
                 const answer = await peer.createAnswer();
                 await peer.setLocalDescription(answer);
-                socket.send(
-                    JSON.stringify({
-                        type: WEBRCT_ANSWER,
-                        payload: answer
-                    })
-                )
+                socket.send(JSON.stringify({
+                    type: WEBRTC_ANSWER,
+                    payload: answer
+                }));
             }
 
-            if(msg.type === WEBRCT_ANSWER){
+            if(msg.type === WEBRTC_ANSWER){
                 await peer.setRemoteDescription(msg.payload);
             }
 
             if(msg.type === WEBRTC_ICE){
                 await peer.addIceCandidate(msg.payload);
             }
+        };
+
+        socket.addEventListener("message", handleMessage);
+
+        if(enabled === "caller"){
+            peer.createOffer()
+            .then(offer => {
+                peer.setLocalDescription(offer);
+                socket.send(
+                    JSON.stringify({
+                        type: WEBRTC_OFFER,
+                        payload: offer
+                    })
+                );
+            });
         }
 
-        return () => peer.close();
+        return () => {
+            socket.removeEventListener("message", handleMessage);
+            peer.close();
+            streamRef.current?.getTracks().forEach(t => t.stop())
+        }
     }, [socket]);
-
-    const startCall = async () => {
-        const offer= await peerRef.current.createOffer();
-        await peerRef.current.setLocalDescription(offer);
-        socket.send(
-            JSON.stringify({
-                type: WEBRTC_OFFER,
-                payload: offer
-            })
-        )
-    }
 
     return (
         <div className="flex flex-col gap-2 w-[200px]">
@@ -87,9 +96,6 @@ function VideoCall({ socket }){
                     <video ref={remoteVideo} autoPlay className="w-20 rounded-full"/>
                 </div>
             </div>
-            <Button onClick={startCall}>
-                Video Call
-            </Button>
         </div>
     )
 }

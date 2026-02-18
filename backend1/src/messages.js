@@ -3,7 +3,7 @@ const MOVE = "move";
 const GAME_OVER = "game_over";
 
 const WEBRTC_OFFER = "webrtc_offer";
-const WEBRCT_ANSWER = "webrtc_answer";
+const WEBRTC_ANSWER = "webrtc_answer";
 const WEBRTC_ICE = "webrtc_ice";
 const VIDEO_PERMISSION = "video_permission";
 
@@ -12,7 +12,7 @@ export {
     MOVE,
     GAME_OVER,
     WEBRTC_OFFER,
-    WEBRCT_ANSWER,
+    WEBRTC_ANSWER,
     WEBRTC_ICE,
     VIDEO_PERMISSION
 };
