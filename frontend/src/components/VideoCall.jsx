@@ -1,5 +1,6 @@
 import { useEffect, useRef } from "react";
 import { WEBRCT_ANSWER, WEBRTC_ICE, WEBRTC_OFFER } from "../../../backend1/src/messages";
+import { Button } from "./Button";
 
 function VideoCall({ socket }){
     const localVideo = useRef();
@@ -77,12 +78,18 @@ function VideoCall({ socket }){
     }
 
     return (
-        <div className="flex flex-col gap-2">
-            <video ref={localVideo} autoPlay muted className="w-40"/>
-            <video ref={remoteVideo} autoPlay className="w-40"/>
-            <button onClick={startCall} className="bg-green-600 px-2 py-1 rounded">
-                Start Video 
-            </button>
+        <div className="flex flex-col gap-2 w-[200px]">
+            <div className="flex">
+                <div className="rounded-full">
+                    <video ref={localVideo} autoPlay muted className="w-30  rounded-full"/>
+                </div>
+                <div className="rounded-full">
+                    <video ref={remoteVideo} autoPlay className="w-20 rounded-full"/>
+                </div>
+            </div>
+            <Button onClick={startCall}>
+                Video Call
+            </Button>
         </div>
     )
 }

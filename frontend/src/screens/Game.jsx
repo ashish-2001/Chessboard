@@ -54,8 +54,8 @@ function Game(){
                     <div className="grid-cols-span-4 w-full flex justify-center">
                         <Chessboard setBoard={setBoard} chess={chess} socket={socket} board={board}/>
                     </div>
-                    <div className="col-span-2 bg-slate-800 w-1/2 flex justify-center">
-                    <VideoCall socket={socket}/>
+                    <div className="flex flex-col bg-slate-800 w-1/2 flex justify-center items-center">
+                    
                         <div className="pt-8">
                             {!stared && <Button onClick={() => {
                                 socket.send(JSON.stringify({
@@ -64,7 +64,9 @@ function Game(){
                             }}>
                                 Play
                             </Button>}
+                            
                         </div>
+                        <VideoCall socket={socket}/>
                     </div>
                 </div>
             </div>

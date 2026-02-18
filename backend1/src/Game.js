@@ -9,6 +9,9 @@ class Game {
         this.moves = [];
         this.startTime = new Date();
         this.moveCount = 0;
+        this.videoPermission = new Map();
+        this.videoPermission.set(player1, false);
+        this.videoPermission.set(player2, false);
 
         this.player1.send(JSON.stringify({
             type: INIT_GAME,
@@ -24,6 +27,17 @@ class Game {
             }
         }));
     };
+
+    setVideoPermission(socket, allowed){
+        this.videoPermission.set(socket, allowed);
+
+        const bothAllowed = this.videoPermission.get(this.player1) && this.videoPermission.get(this.player2);
+
+        if(bothAllowed){
+            this.player1.send(JSON.stringify({ type: "start_video" }));
+            this.player2.send(JSON.stringify({ type: "start_video" }));
+        }
+    }
 
     makeMove(socket, { from, to }){
     
