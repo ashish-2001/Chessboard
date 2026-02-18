@@ -3,6 +3,7 @@ import { Chessboard } from "../components/Chessboard"
 import { useSocket } from "../hooks/useSocket"
 import { useEffect, useState } from "react";
 import { Chess } from "chess.js";
+import { VideoCall } from "../components/VideoCall";
 
 
 const INIT_GAME = "init_game";
@@ -54,6 +55,7 @@ function Game(){
                         <Chessboard setBoard={setBoard} chess={chess} socket={socket} board={board}/>
                     </div>
                     <div className="col-span-2 bg-slate-800 w-1/2 flex justify-center">
+                    <VideoCall socket={socket}/>
                         <div className="pt-8">
                             {!stared && <Button onClick={() => {
                                 socket.send(JSON.stringify({
